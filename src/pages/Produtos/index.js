@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Divider, 
-  Typography, 
-  Grid,
-  Button,
-  Snackbar,
+import {
   Backdrop,
+  Button,
   CircularProgress,
-} from '@material-ui/core'
-import Produto from '../../components/Produto';
-import useStyles from './styles';
-import { useHistory } from 'react-router';
-import { get } from '../../services/ApiClient';
-import useAuth from '../../hook/useAuth';
+  Divider,
+  Grid,
+  Snackbar,
+  Typography,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import Produto from '../../components/Produto';
+import useAuth from '../../hook/useAuth';
+import { get } from '../../services/ApiClient';
+import useStyles from './styles';
 
 function Produtos() {
   const classes = useStyles();
@@ -54,17 +54,19 @@ function Produtos() {
     <>
       <Typography variant="h4">Seus produtos</Typography>
       <Grid container spacing={4}>
-        {produtos.map(produto => (
+        {produtos.map((produto) => (
           <Grid className={classes.produto} item key={produto.id}>
             <Produto {...produto} recarregar={() => setCarregar(true)} />
           </Grid>
         ))}
       </Grid>
       <Divider className={classes.divider} />
-      <Button 
+      <Button
         className={classes.botao}
         onClick={() => history.push('/produtos/novo')}
-      >ADICIONAR PRODUTO</Button>
+      >
+        ADICIONAR PRODUTO
+      </Button>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         autoHideDuration={3000}
@@ -79,7 +81,7 @@ function Produtos() {
         <CircularProgress color="inherit" />
       </Backdrop>
     </>
-  )
+  );
 }
 
 export default Produtos;

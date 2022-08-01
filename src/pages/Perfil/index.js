@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { 
-  Divider, 
-  Typography, 
-  Button,
-  TextField,
-  Snackbar,
+import {
   Backdrop,
+  Button,
   CircularProgress,
-} from '@material-ui/core'
-import useStyles from './styles';
-import { useHistory } from 'react-router';
+  Divider,
+  Snackbar,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { get } from '../../services/ApiClient';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import useAuth from '../../hook/useAuth';
+import { get } from '../../services/ApiClient';
+import useStyles from './styles';
 
 function Perfil() {
   const classes = useStyles();
   const history = useHistory();
   const { token } = useAuth();
-  const [usuario, setUsuario] = useState({ nome: '', nome_loja: '', email: '' });
+  const [usuario, setUsuario] = useState({
+    nome: '',
+    nome_loja: '',
+    email: '',
+  });
   const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
 
   useEffect(() => {
     async function carregarUsuario() {
-      try {  
+      try {
         setCarregando(true);
         setErro('');
 
         const { dados, erro } = await get('perfil', token);
-        
-        if(erro) {
+
+        if (erro) {
           setErro(dados);
           return;
         }
@@ -55,10 +59,12 @@ function Perfil() {
         <TextField label="E-mail" disabled value={usuario.email} />
       </div>
       <Divider className={classes.divider} />
-      <Button 
+      <Button
         className={classes.botao}
         onClick={() => history.push('/perfil/editar')}
-      >EDITAR PERFIL</Button>
+      >
+        EDITAR PERFIL
+      </Button>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         autoHideDuration={3000}
@@ -73,7 +79,7 @@ function Perfil() {
         <CircularProgress color="inherit" />
       </Backdrop>
     </>
-  )
+  );
 }
 
 export default Perfil;
