@@ -26,7 +26,6 @@ function EdicaoProduto() {
   const { token } = useAuth();
   const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const [old, setOld] = useState([]);
 
   async function onSubmit(data) {
     try {

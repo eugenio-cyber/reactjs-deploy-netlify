@@ -21,7 +21,6 @@ import { put } from '../../services/ApiClient';
 function EdicaoPerfil() {
   const classes = useStyles();
   const history = useHistory();
-  const [empty, setEmpty] = useState([]);
   const { token } = useAuth();
   const { atualizar } = useLoja();
   const { handleSubmit, register } = useForm();
